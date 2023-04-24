@@ -33,3 +33,18 @@ getch に相当する処理ではどういうコードが得られるか？
 + 表示については、[少しの修正で](https://github.com/hymkor/study-go-readchar/commit/f4dd61cab3c17023bffabe3f38514602f0ba7a31) 絵文字もいけた
 
 [SetConsoleMode]: https://learn.microsoft.com/ja-jp/windows/console/setconsolemode
+
+追試
+----
+
+以前、go-readline-ny で WindowsTerminal 対応を行った際もテストをやってみる
+
+https://zenn.dev/link/comments/46b0227e285fcb より引用：
+
+1. 丸数字 「①」 の入力に問題がないこと（本件）
+2. 絵文字 「👨‍🌾」の入力に問題がないこと（[合字ふたたび？](https://zenn.dev/zetamatta/scraps/c735949deaa6fb) / [DLC1](https://zenn.dev/zetamatta/books/b820d588f4856bcf836c/viewer/29db17)）
+3. 異体字 「邊󠄄」（シンニョウの点が一つ版）の入力に問題がないこと（[異体字](https://zenn.dev/zetamatta/books/b820d588f4856bcf836c/viewer/849ce9)）
+    + ただし、異体字セレクタはキーボードを通らないので、Ctrl-Y で処理できればよい
+4. ALT-TAB で端末の切り替えを行った後に入力した文字が二重に入力されないこと（[#393](https://github.com/zetamatta/nyagos/issues/393)）
+
+「3.」の Ctrl-Y は未対応なので、一応 OK の模様.
