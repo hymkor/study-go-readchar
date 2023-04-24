@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
 	"os"
@@ -25,6 +26,8 @@ func mains() error {
 	defer disable()
 
 	defer term.Restore(stdin, oldState)
+
+	w := bufio.NewWriter(os.Stdout)
 	for {
 		var buffer [256]byte
 
@@ -33,13 +36,14 @@ func mains() error {
 			return err
 		}
 		ch := buffer[:n]
-		for _, c := range ch {
+		for _, c := range string(ch) {
 			if c <= 32 {
-				fmt.Printf("\\x%02X ", c)
+				fmt.Fprintf(w, "\\x%02X ", c)
 			} else {
-				fmt.Printf("'%c' ", c)
+				fmt.Fprintf(w, "%c", c)
 			}
 		}
+		w.Flush()
 		// exit with Ctrl-Z
 		if bytes.Equal(ch, []byte{'z' & 0x1F}) {
 			return nil
