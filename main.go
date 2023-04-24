@@ -18,6 +18,12 @@ func mains() error {
 	if err != nil {
 		return err
 	}
+	disable, err := enable(stdin)
+	if err != nil {
+		return err
+	}
+	defer disable()
+
 	defer term.Restore(stdin, oldState)
 	for {
 		var buffer [256]byte
