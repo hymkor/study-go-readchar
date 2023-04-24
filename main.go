@@ -27,7 +27,13 @@ func mains() error {
 			return err
 		}
 		ch := buffer[:n]
-		fmt.Print(ch)
+		for _, c := range ch {
+			if c <= 32 {
+				fmt.Printf("\\x%02X ", c)
+			} else {
+				fmt.Printf("'%c' ", c)
+			}
+		}
 		// exit with Ctrl-Z
 		if bytes.Equal(ch, []byte{'z' & 0x1F}) {
 			return nil
