@@ -30,5 +30,6 @@ getch に相当する処理ではどういうコードが得られるか？
 
 + 準標準ライブラリ(golang.org/x/term and x/sys/windows)だけでも、readline 的なことはできる
 + ただし、あいかわらず倍角文字の入力ではカーソル移動位置が狂う
++ 表示については、[少しの修正で](https://github.com/hymkor/study-go-readchar/commit/f4dd61cab3c17023bffabe3f38514602f0ba7a31) 絵文字もいけた
 
 [SetConsoleMode]: https://learn.microsoft.com/ja-jp/windows/console/setconsolemode
